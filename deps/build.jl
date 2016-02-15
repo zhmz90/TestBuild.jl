@@ -1,1 +1,1 @@
-run(`sudo ls`)
+run(`sudo -S mkdir`)
