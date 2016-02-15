@@ -1,1 +1,2 @@
-run(`sudo -S mkdir`)
+run(`sudo -S mkdir test`)
+
