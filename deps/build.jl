@@ -14,8 +14,6 @@ if !detecthts()
     
     # Build libhts
 
-
-
     @osx_only begin
         autoconf = library_dependency("autoconf", os=:Darwin)
         #=
@@ -43,6 +41,7 @@ if !detecthts()
                            ChangeDirectory(_autoconfdir)
                            `./configure`
                            `make`
+                           `cp bin/autoconf $_bindir`
                            end)
                   end
                  end), autoconf)
