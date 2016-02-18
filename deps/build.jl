@@ -26,22 +26,22 @@ if !detecthts()
         _prefix = joinpath(BinDeps.depsdir(autoconf),"usr")
         _srcdir = joinpath(BinDeps.depsdir(autoconf),"src")
         _autoconfdir = joinpath(_srcdir,"autoconf-2.68")
-        _bindir = joinpath(_prefix, "bin")
-        
+        #_bindir = joinpath(_prefix, "bin")
+        _libdir = joinpath(_prefix, "lib")
         provides(BuildProcess,
                  (@build_steps begin
                   CreateDirectory(_srcdir)
-                  CreateDirectory(_bindir)
+                  CreateDirectory(_libdir)
                   @build_steps begin
                   ChangeDirectory(_srcdir)
                   `rm -rf autoconf`
                   `wget http://ftpmirror.gnu.org/autoconf/autoconf-2.68.tar.gz`
                   `tar xvf autoconf-2.68.tar.gz`
-                  FileRule(joinpath(_bindir, "autoconf"), @build_steps begin
+                  FileRule(joinpath(_libdir, "autoconf"), @build_steps begin
                            ChangeDirectory(_autoconfdir)
                            `./configure`
                            `make`
-                           `cp bin/autoconf $_bindir`
+                           `cp bin/autoconf $_libdir`
                            end)
                   end
                  end), autoconf)
