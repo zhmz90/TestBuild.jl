@@ -42,14 +42,16 @@ if !detecthts()
                            `./configure`
                            `make`
                            `cp bin/autoconf $_libdir`
+                           `ls $_libdir`
                            end)
-                      @show readdir(_libdir)
                   end
                  end), autoconf)
         
         
         @BinDeps.install Dict(:autoconf => :autoconf)
     end
+    @show readdir(_libdir)
+
     info("Congrats! Successfully build contoconf")
 #=
     hts = library_dependency("hts", aliases=["libhts","libhts.so","libhts.dylib","libhts.dll"])#, runtime=true, os=:Unix)
