@@ -15,7 +15,7 @@ if !detecthts()
     # Build libhts
 
     @osx_only begin
-        autoconf = library_dependency("autoconf", aliases=["autoconf"], os=:Darwin)
+        autoconf = library_dependency("autoconf", aliases=["autoconf"],runtime=false os=:Darwin)
         #=
         if Pkg.installed("Homebrew") === nothing
             error("Homebrew package not installed, please run Pkg.add(\"Homebrew\")")
