@@ -14,13 +14,14 @@ if !detecthts()
     
     # Build libhts
     
-    autoconf = library_dependency("autoconf", os=:Darwin)
+
     @osx_only begin
+        autoconf = library_dependency("autoconf", os=:Darwin)
         if Pkg.installed("Homebrew") === nothing
             error("Homebrew package not installed, please run Pkg.add(\"Homebrew\")")
         end
         provides( Homebrew.HB, "autoconf", autoconf, os = :Darwin )
-        #@BinDeps.install Dict(:autoconf => :autoconf)
+        @BinDeps.install Dict(:autoconf => :autoconf)
     end
     
     hts = library_dependency("hts", aliases=["libhts","libhts.so","libhts.dylib","libhts.dll"])#, runtime=true, os=:Unix)
