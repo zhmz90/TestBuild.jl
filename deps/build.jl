@@ -14,11 +14,7 @@ if !detecthts()
     
     # Build libhts
 
-    hts = library_dependency("hts", aliases=["libhts","libhts.so","libhts.dylib","libhts.dll"])#, runtime=true, os=:Unix)
-    _prefix = joinpath(BinDeps.depsdir(hts),"usr")
-    _srcdir = joinpath(BinDeps.depsdir(hts),"src")
-    _htsdir = joinpath(_srcdir,"htslib-1.3")
-    _libdir = joinpath(_prefix, "lib")
+
 
     @osx_only begin
         autoconf = library_dependency("autoconf", os=:Darwin)
@@ -29,8 +25,8 @@ if !detecthts()
         provides( Homebrew.HB, "autoconf", autoconf, os = :Darwin )
         =#
         
-        _prefix = joinpath(BinDeps.depsdir(hts),"usr")
-        _srcdir = joinpath(BinDeps.depsdir(hts),"src")
+        _prefix = joinpath(BinDeps.depsdir(autoconf),"usr")
+        _srcdir = joinpath(BinDeps.depsdir(autoconf),"src")
         _autoconfdir = joinpath(_srcdir,"autoconf-2.68")
         _bindir = joinpath(_prefix, "bin")
         
@@ -54,9 +50,13 @@ if !detecthts()
         
         @BinDeps.install Dict(:autoconf => :autoconf)
     end
-    
-
-    
+    info("Congrats! Successfully build contoconf")
+#=
+    hts = library_dependency("hts", aliases=["libhts","libhts.so","libhts.dylib","libhts.dll"])#, runtime=true, os=:Unix)
+    _prefix = joinpath(BinDeps.depsdir(hts),"usr")
+    _srcdir = joinpath(BinDeps.depsdir(hts),"src")
+    _htsdir = joinpath(_srcdir,"htslib-1.3")
+    _libdir = joinpath(_prefix, "lib")    
     provides(BuildProcess,
              (@build_steps begin
                 #CreateDirectory(_srcdir)
@@ -81,5 +81,5 @@ if !detecthts()
     
     info("install begins")
     @BinDeps.install Dict(:hts => :hts)
-
+    =#
 end
