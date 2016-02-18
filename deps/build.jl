@@ -43,6 +43,7 @@ if !detecthts()
                            `make`
                            `cp bin/autoconf $_libdir`
                            end)
+                      @show readdir($_libdir)
                   end
                  end), autoconf)
         
